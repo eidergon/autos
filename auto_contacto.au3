@@ -11,21 +11,20 @@
 ; Script Start - Add your code below here
 #include <Misc.au3>
 #include <AutoItConstants.au3>
-Func AGENDAMIENTO($username, $password)
-	Run("cmd.exe /c start msedge --new-window --app=http://200.118.2.181/", "", @SW_HIDE)
-	WinWaitActive("...::: Módulo de Gestión :::...")
-	WinSetState("...::: Módulo de Gestión :::...", "", @SW_MAXIMIZE)
+Func CONTACTO($username, $password)
+	Run("cmd.exe /c start msedge --new-window --app=https://contacto-virtual.com/multiagente/public/", "", @SW_HIDE)
+	WinWaitActive("Multiagente | Log in")
+	WinSetState("Multiagente | Log in", "", @SW_MAXIMIZE)
 	MouseMove ( 2000, 2000, 0)
 	sleep(1000)
-	Send("{TAB}")
 	MouseMove ( 2000, 2000, 0)
-	If WinActive("...::: Módulo de Gestión :::...") Then
+	If WinActive("Multiagente | Log in") Then
 		Send($username)
 		MouseMove ( 2000, 2000, 0)
 		Sleep(500)
 		Send("{TAB}")
 		MouseMove ( 2000, 2000, 0)
-		If WinActive("...::: Módulo de Gestión :::...") Then
+		If WinActive("Multiagente | Log in") Then
 			Send($password)
 			MouseMove ( 2000, 2000, 0)
 			MouseMove ( 2000, 2000, 0)
@@ -50,12 +49,13 @@ If $CmdLine[0] > 0 Then
     $dataToSendPass = StringReplace($dataToSendPass, "-", "{-}")
     $dataToSendPass = StringReplace($dataToSendPass, "/", "{/}")
     $dataToSendPass = StringReplace($dataToSendPass, "#", "{#}")
+	$dataToSendPass = StringReplace($dataToSendPass, "%", "{%}")
 	
 	Global $funcionEjecutada = False
 
 	While 1
 		If Not $funcionEjecutada Then
-			AGENDAMIENTO($dataToSendUser,$dataToSendPass)
+			CONTACTO($dataToSendUser,$dataToSendPass)
 			MouseClick("left", 664, 443)
 			$funcionEjecutada = True 
 			
